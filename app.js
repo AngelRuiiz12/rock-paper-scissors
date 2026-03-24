@@ -1,118 +1,54 @@
+const btn_list = document.querySelectorAll(".btn")
+const scores = document.querySelector(".scores")
+
+const options = ["rock", "paper", "scissors"]
+
+let playerScore = 0
+let computerScore = 0
+
 function getComputerChoice() {
 
-    let computerChoice = undefined
-    let randint = Math.random()
+    const random_index = Math.floor(Math.random() * options.length)
+    return options[random_index]
+}
 
-    if (randint < 0.33) {
-        computerChoice = 'Rock'
-    } else if (randint > 0.33 && randint < 0.66) {
-        computerChoice = 'Paper'
+
+function playRound_2(playerChoice, computerChoice) {
+    if (playerChoice === computerChoice) {
+        return "Empate!"
+    } else if (
+        (playerChoice === "rock" && computerChoice === "scissors") ||
+        (playerChoice === "paper" && computerChoice === "rock") ||
+        (playerChoice === "scissors" && computerChoice === "paper")
+    ) {
+        playerScore += 1
+        return "Gana el jugador!"
     } else {
-        comp = 'Scissors'
-    }
-
-    return computerChoice
-}
-
-function getHumanChoice() {
-    let humanChoice = prompt("Select 'Rock', 'Paper' or 'Scissors': ")
-
-    return humanChoice
-}
-
-
-function playRound(humanChoice, computerChoice) {
-
-    let winner = undefined
-
-    if (humanChoice === "Rock" && computerChoice === "Paper") {
-        console.log("Humano: " + humanChoice)
-        console.log("Ordenador: " + computerChoice)
-        console.log("Gana el Ordenador!")
-
-        winner = "Ordenador"
-        return winner
-
-    } else if (humanChoice === "Rock" && computerChoice === "Scissors") {
-        console.log("Humano: " + humanChoice)
-        console.log("Ordenador: " + computerChoice)
-        console.log("Gana el Humano!")
-
-        winner = "Humano"
-        return winner
-
-    } else if (humanChoice === "Paper" && computerChoice === "Rock") {
-        console.log("Humano: " + humanChoice)
-        console.log("Ordenador: " + computerChoice)
-        console.log("Gana el Humano!")
-
-        winner = "Humano"
-        return winner
-
-    } else if (humanChoice === "Paper" && computerChoice === "Scissors") {
-        console.log("Humano: " + humanChoice)
-        console.log("Ordenador: " + computerChoice)
-        console.log("Gana el Ordenador!")
-
-        winner = "Ordenador"
-        return winner
-        
-    } else if (humanChoice === "Scissors" && computerChoice === "Paper") {
-        console.log("Humano: " + humanChoice)
-        console.log("Ordenador: " + computerChoice)
-        console.log("Gana el Humano!")
-
-        winner = "Humano"
-        return winner
-
-    } else if (humanChoice == "Scissors" && computerChoice === "Rock") {
-        console.log("Humano: " + humanChoice)
-        console.log("Ordenador: " + computerChoice)
-        console.log("Gana el Ordenador!")
-
-        winner = "Ordenador"
-        return winner
-
-    }else {
-        console.log("Humano: " + humanChoice)
-        console.log("Ordenador: " + computerChoice)
-        console.log("Empate!!!")
+        computerScore += 1
+        return "Gana el ordenador!"
     }
 }
 
+btn_list.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        const playerChoice = e.target.id
+        const computerChoice = getComputerChoice()
 
-function playGame() {
+        const winner = playRound_2(playerChoice, computerChoice)
 
-    let humanScore = 0
-    let computerScore = 0
-
-    for (let i = 0; i <= 4; i++) {
-
-        let humanSelection = getHumanChoice();
-        let computerSelection = getComputerChoice();
-
-        let winner = playRound(humanSelection, computerSelection);
-
-        if (winner === "Humano") {
-            humanScore += 1
-        } else {
-            computerScore += 1
-        }
-    }
-    
-    console.log("Resultados:")
-    console.log("Puntos Humano: " + humanScore)
-    console.log("Puntos Ordenador: " + computerScore)
-
-    if (humanScore > computerScore) {
-        console.log("Gana la partida el Humano!!!")
-    } else if (humanScore < computerScore) {
-        console.log("Gana la partida el Ordenador!!!")
-    } else {
-        console.log("Habeis quedado empate!!!")
-    }
-
-}
+        console.log("Player Choice: " + playerChoice)
+        console.log("Computer Choice: " + computerChoice)
+        console.log(winner)
+        console.log(`SCORES: Player [${playerScore}] || Computer [${computerScore}]`)
+        console.log("--------------------------")
+    })
+})
 
 
-playGame()
+// 1. el juego debe empezar cuando clicko sobre uno de los botones 
+// 2. al click sobre uno de los botones se crea la playerChoice y se genera tambien la computerChoice
+// 3. se activa la func playRound() y se le pasa por parametros playerChoice y computerChoice
+// 4. al terminar playRound() se debe actualizar la tabla de Scores, indicando la playerChoice, la computerChoice y el ganador.
+// 5. se añade un punto de victoria a la score del ganador (player o computer)
+// 6. se repite este proceso 5 veces.
+// 7. al acabar las 5 vueltas, se debe mostrar en la pagina web quien ha ganado (alert() indicando el ganador)
