@@ -1,5 +1,6 @@
 const btn_list = document.querySelectorAll(".btn")
 const scores = document.querySelector(".scores")
+const score_list = document.querySelector(".score-list")
 
 const options = ["rock", "paper", "scissors"]
 
@@ -36,11 +37,28 @@ btn_list.forEach(btn => {
 
         const winner = playRound_2(playerChoice, computerChoice)
 
+        // Indico por la terminal los datos de la partida
         console.log("Player Choice: " + playerChoice)
         console.log("Computer Choice: " + computerChoice)
         console.log(winner)
-        console.log(`SCORES: Player [${playerScore}] || Computer [${computerScore}]`)
+        console.log(`SCORES: Player: ${playerScore} // Computer: ${computerScore}`)
         console.log("--------------------------")
+
+        // Añado el resultado a la lista de SCORE
+        const li = document.createElement("li")
+        li.textContent = `Player: ${playerScore} // Computer: ${computerScore}`
+        score_list.appendChild(li)
+
+        // Compruebo si ya se han jugado 5 partidas para indicar quien ha ganado
+        const score_list_li = document.querySelectorAll(".score-list li")
+
+        if (score_list_li.length === 5) {
+            if (playerScore > computerScore) {
+                alert(`Gana el jugador!!! --> Player: ${playerScore} // Computer: ${computerScore}`)
+            } else {
+                alert(`Gana el ordenador!!! --> Player: ${playerScore} // Computer: ${computerScore}`)
+            }
+        }
     })
 })
 

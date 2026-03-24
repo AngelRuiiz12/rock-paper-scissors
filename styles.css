@@ -62,3 +62,11 @@ h1 {
     margin-top: 0;
     text-align: center;
 }
+
+.score-list {
+    text-align: center;
+}
+
+.score-list li{
+    list-style-position: inside;
+}
