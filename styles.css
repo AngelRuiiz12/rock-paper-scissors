@@ -21,6 +21,11 @@ h1 {
     padding: 8px 15px;
 }
 
+div h3 {
+    margin-block: 20px;
+    text-align: center;
+}
+
 .container {
     display: flex;
     justify-content: space-around;
@@ -69,4 +74,10 @@ h1 {
 
 .score-list li{
     list-style-position: inside;
+}
+
+.game-status {
+    color: white;
+    text-align: center;
+    margin-block: 20px 40px;
 }

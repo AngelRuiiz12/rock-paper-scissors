@@ -16,17 +16,17 @@ function getComputerChoice() {
 
 function playRound_2(playerChoice, computerChoice) {
     if (playerChoice === computerChoice) {
-        return "Empate!"
+        return "Tie!"
     } else if (
         (playerChoice === "rock" && computerChoice === "scissors") ||
         (playerChoice === "paper" && computerChoice === "rock") ||
         (playerChoice === "scissors" && computerChoice === "paper")
     ) {
         playerScore += 1
-        return "Gana el jugador!"
+        return "Player Wins!"
     } else {
         computerScore += 1
-        return "Gana el ordenador!"
+        return "Computer Wins!"
     }
 }
 
@@ -37,12 +37,12 @@ btn_list.forEach(btn => {
 
         const winner = playRound_2(playerChoice, computerChoice)
 
-        // Indico por la terminal los datos de la partida
-        console.log("Player Choice: " + playerChoice)
-        console.log("Computer Choice: " + computerChoice)
-        console.log(winner)
-        console.log(`SCORES: Player: ${playerScore} // Computer: ${computerScore}`)
-        console.log("--------------------------")
+
+        // Indico el desarrollo de la partida por el Game Status
+        const game_status = document.querySelector(".game-status")
+        game_status.innerHTML = `Player Choice: ${playerChoice} <br>
+        Computer Choice: ${computerChoice} <br>
+        <strong>${winner}<strong>`
 
         // Añado el resultado a la lista de SCORE
         const li = document.createElement("li")
@@ -54,19 +54,10 @@ btn_list.forEach(btn => {
 
         if (score_list_li.length === 5) {
             if (playerScore > computerScore) {
-                alert(`Gana el jugador!!! --> Player: ${playerScore} // Computer: ${computerScore}`)
+                alert(`Player Wins!!! --> Player: ${playerScore} // Computer: ${computerScore}`)
             } else {
-                alert(`Gana el ordenador!!! --> Player: ${playerScore} // Computer: ${computerScore}`)
+                alert(`Computer Wins!!! --> Player: ${playerScore} // Computer: ${computerScore}`)
             }
         }
     })
 })
-
-
-// 1. el juego debe empezar cuando clicko sobre uno de los botones 
-// 2. al click sobre uno de los botones se crea la playerChoice y se genera tambien la computerChoice
-// 3. se activa la func playRound() y se le pasa por parametros playerChoice y computerChoice
-// 4. al terminar playRound() se debe actualizar la tabla de Scores, indicando la playerChoice, la computerChoice y el ganador.
-// 5. se añade un punto de victoria a la score del ganador (player o computer)
-// 6. se repite este proceso 5 veces.
-// 7. al acabar las 5 vueltas, se debe mostrar en la pagina web quien ha ganado (alert() indicando el ganador)
